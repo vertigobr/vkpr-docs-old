@@ -2,7 +2,7 @@ module.exports = {
   title: 'VKPR',
   tagline: 'Vertigo Kubernetes Production Runtime',
   url: 'https://vertigobr.github.io',
-  baseUrl: '/vkpr-docs',
+  baseUrl: '/vkpr-docs/',
   onBrokenLinks: 'throw',
   favicon: 'https://vertigo.com.br/wp-content/uploads/favicon.png',
   organizationName: 'vertigobr',
