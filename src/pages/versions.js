@@ -20,9 +20,9 @@ function Version() {
     <Layout
       title="Versions"
       permalink="/versions"
-      description="Docusaurus 2 Versions page listing all documented site versions">
+      description="VKPR Versions page listing all documented site versions">
       <main className="container margin-vert--lg">
-        <h1>Docusaurus documentation versions</h1>
+        <h1>VKPR documentation versions</h1>
 
         {stableVersion && (
           <div className="margin-bottom--lg">
@@ -89,8 +89,7 @@ function Version() {
           <div className="margin-bottom--lg">
             <h3 id="archive">Past versions (Not maintained anymore)</h3>
             <p>
-              Here you can find documentation for previous versions of
-              Docusaurus.
+              Here you can find documentation for previous versions of VKPR.
             </p>
             <table>
               <tbody>
