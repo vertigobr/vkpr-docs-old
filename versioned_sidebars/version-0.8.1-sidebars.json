@@ -1,0 +1,68 @@
+{
+  "version-0.8.1/docs": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "VKPR",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.8.1/introduction"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.1/stacks"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.1/roadmap"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.1/faq"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.8.1/quickstart"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.1/velero-setup"
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Amazon EKS",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-0.8.1/eks/installation"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.1/eks/velero-setup"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Digital Ocean",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-0.8.1/digital-ocean/installation"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
