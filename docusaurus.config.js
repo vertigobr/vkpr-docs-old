@@ -29,6 +29,7 @@ module.exports = {
         {
           type: 'docsVersionDropdown',
           position: 'right',
+          dropdownActiveClassDisabled: true,
           dropdownItemsAfter: [
             {
               to: '/versions',
