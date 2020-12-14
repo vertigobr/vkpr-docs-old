@@ -4,7 +4,7 @@ module.exports = {
   url: 'https://vertigobr.github.io',
   baseUrl: '/vkpr-docs/',
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'warn',
+  // onBrokenMarkdownLinks: 'warn',
   favicon: 'https://vertigo.com.br/wp-content/uploads/favicon.png',
   organizationName: 'vertigobr',
   projectName: 'vkpr',
