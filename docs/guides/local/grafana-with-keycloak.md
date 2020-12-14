@@ -122,5 +122,5 @@ To access the KeyCloak administration console, use:
 ```yaml
 url: http://vkpr-keycloak-http.default.svc
 username: admin
-password: vert1234
+password: vkpr1234
 ```
