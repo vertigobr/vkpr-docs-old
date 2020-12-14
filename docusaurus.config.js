@@ -4,6 +4,7 @@ module.exports = {
   url: 'https://vertigobr.github.io',
   baseUrl: '/vkpr-docs/',
   onBrokenLinks: 'throw',
+  onBrokenMarkdownLinks: 'warn',
   favicon: 'https://vertigo.com.br/wp-content/uploads/favicon.png',
   organizationName: 'vertigobr',
   projectName: 'vkpr',
@@ -17,11 +18,24 @@ module.exports = {
         srcDark: 'img/vtg-light.svg',
       },
       items: [
+        // left
         {
           to: 'docs/',
           activeBasePath: 'docs',
           label: 'Docs',
           position: 'left',
+        },
+        // right
+        {
+          type: 'docsVersionDropdown',
+          position: 'right',
+          dropdownActiveClassDisabled: true,
+          dropdownItemsAfter: [
+            {
+              to: '/versions',
+              label: 'All versions',
+            },
+          ],
         },
         {
           href: 'https://github.com/vertigobr/vkpr',
@@ -109,7 +123,6 @@ module.exports = {
       '@docusaurus/preset-classic',
       {
         docs: {
-          homePageId: 'introduction',
           sidebarPath: require.resolve('./sidebars.js'),
           editUrl: 'https://github.com/vertigobr/vkpr/edit/docs/',
         },

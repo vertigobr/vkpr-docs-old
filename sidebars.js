@@ -20,5 +20,14 @@ module.exports = {
         }
       ],
     },
+    {
+      type: 'category',
+      label: 'Guides',
+      items: [
+        {
+          Local: ['guides/local/grafana-with-keycloak']
+        }
+      ],
+    },
   ],
 };
