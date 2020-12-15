@@ -41,10 +41,7 @@ The **Logging Stack** is dedicated to distributed logs management tools.
 
 The **Monitoring Stack** is dedicated to observation and metrics management tools either for your services, applications or the Kubernetes Cluster.
 
-- [Prometheus Operator](/docs/stacks#prometheus-operator) provides Kubernetes native deployment and management of Prometheus and related monitoring components. Prometheus Operator contains the following modules:
-  - [Grafana](https://grafana.com/oss/grafana/) allows you to query, visualize and alert on metrics and logs no matter where they are stored.
-  - [Prometheus](https://grafana.com/oss/prometheus/) monitoring system includes a rich, multidimensional data model, a concise and powerful query language called PromQL, an efficient embedded timeseries database, and over 150 integrations with third-party systems.
-  - [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) handles alerts sent by client applications such as the Prometheus server.
+- [Prometheus Stack](/docs/stacks#prometheus-operator) provides Kubernetes native deployment and management of Prometheus and related monitoring components.
 - [Jaeger](/docs/stacks#jaeger) is a distributed tracing system released as open source. It is used for monitoring and troubleshooting microservices-based distributed systems.
 
 ### Security stack
@@ -68,7 +65,7 @@ The **Backup Stack** is dedicated to backup and restore tools in order to migrat
 | [ExternalDNS](/docs/stacks#externaldns)                           |  `3.4.9`   |
 | [NGINX Ingress Controller](/docs/stacks#nginx-ingress-controller) |  `3.7.1`   |
 | [Loki](/docs/stacks#loki)                                         |  `2.0.0`   |
-| [Prometheus Operator](/docs/stacks#prometheus-operator)           |  `10.3.1`  |
+| [Prometheus Stack](/docs/stacks#prometheus-stack)                 |  `10.3.1`  |
 | [Jaeger](/docs/stacks#jaeger)                                     |  `0.39.0`  |
 | [Cert Manager](/docs/stacks#cert-manager)                         |  `1.0.3`   |
 | [Keycloak](/docs/stacks#keycloak)                                 |  `9.5.0`   |

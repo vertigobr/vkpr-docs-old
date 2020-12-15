@@ -73,38 +73,39 @@ To see more configurations, access the [documentation](https://github.com/grafan
 
 ## Monitoring stack
 
-### Prometheus Operator
+### Prometheus Stack
 
-[Prometheus Operator](https://github.com/coreos/prometheus-operator) provides Kubernetes native deployment and management of [Prometheus](https://prometheus.io/) and related monitoring components. The purpose of this project is to simplify and automate the configuration of a Prometheus based monitoring stack for Kubernetes clusters.
-
-Prometheus Operator contains the following modules:
-
-- **[Grafana](https://github.com/grafana/grafana)** allows you to query, visualize, alert on and understand your metrics no matter where they are stored.
-
-- **[Prometheus](https://prometheus.io/)** scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts.
-
-- **[Alertmanager](https://github.com/prometheus/alertmanager)** handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integrations such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) a collection of Kubernetes manifests, [Grafana](https://github.com/grafana/grafana) dashboards, and [Prometheus](https://prometheus.io/) rules combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator.
 
 #### Implementation
 
 By default the **Prometheus Operator** is enabled in *VKPR* installation. An example of configuration:
 
 ```yaml
-prometheus-operator:
+kube-prometheus-stack:
   enabled: true
   prometheusOperator:
+    enabled: true
     createCustomResource: false
+    cleanupCustomResource: false
+  prometheus:
+    enabled: true
+  alertmanager:
+    enabled: false
   grafana:
-    adminPassword: "password"
+    enabled: true
+    sidecar:
+      datasources:
+        enabled: true
+    persistence:
+      enabled: false
     ingress:
       enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        kubernetes.io/tls-acme: "true"
-      hosts: ["grafana.whoami.com"]
+      hosts:
+      - grafana.<DOMAIN>
 ```
 
-To see more configurations, access the [documentation](https://github.com/helm/charts/tree/master/stable/prometheus-operator#general).
+To see more configurations, access the [documentation](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
 
 ### Jaeger
 
@@ -137,6 +138,8 @@ jaeger:
       hosts:
       - jaeger.<DOMAIN>
 ```
+
+To see more configurations, access the [documentation](https://github.com/jaegertracing/helm-charts/tree/master/charts/jaeger).
 
 ## Security stack
 
