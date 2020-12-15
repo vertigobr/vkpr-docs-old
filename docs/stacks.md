@@ -106,9 +106,41 @@ prometheus-operator:
 
 To see more configurations, access the [documentation](https://github.com/helm/charts/tree/master/stable/prometheus-operator#general).
 
+### Jaeger
+
+[Jaeger](https://github.com/jaegertracing/jaeger) is a distributed tracing system released as open source. It is used for monitoring and troubleshooting microservices-based distributed systems.
+
+#### Implementation
+
+By default the **Jaeger** is disabled in *VKPR* installation. An example of configuration:
+
+```yaml
+jaeger:
+  enabled: true
+  cassandra:
+    config:
+      max_heap_size: 1024M
+      heap_new_size: 256M
+      cluster_size: 1
+    persistence:
+      enabled: true
+    resources:
+      requests:
+        memory: 2048Mi
+        cpu: 0.4
+      limits:
+        memory: 2048Mi
+        cpu: 1.0
+  query:
+    ingress:
+      enabled: true
+      hosts:
+      - jaeger.<DOMAIN>
+```
+
 ## Security stack
 
-### cert-manager
+### Cert Manager
 
 [cert-manager](https://github.com/jetstack/cert-manager) is a Kubernetes addon to automate the management and issuance of TLS certificates from various issuing sources.
 
