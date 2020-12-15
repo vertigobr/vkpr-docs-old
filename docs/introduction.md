@@ -76,7 +76,7 @@ The **Backup Stack** is dedicated to backup and restore tools in order to migrat
 ## Requisites
 
 - Kubernetes >= 1.15
-- Helm >= 3
+- Helm >= 3.0.0
 
 ## Contributing
 

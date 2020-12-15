@@ -5,12 +5,12 @@ title: Grafana with KeyCloak
 
 This guide shows the Grafana with KeyCloak in local k3d environment and some tools are prerequisites for run:
 
-- [Helm](https://helm.sh/docs/intro/install/#helm)
-- [k3d](https://k3d.io/)
+- [k3d](https://k3d.io/) >= 3.3.0
+- [Helm](https://helm.sh/docs/intro/install/#helm) >= 3.0.0
 
 ## Installation and setup VKPR
 
-The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create two configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-keycloak-grafana.yaml) for VKPR and [json file](https://github.com/vertigobr/vkpr/blob/master/examples/keycloak/realm.json) to KeyCloak:
+The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create two configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-keycloak-grafana.yaml) for VKPR and [realm file](https://github.com/vertigobr/vkpr/blob/master/examples/keycloak/realm.json) to KeyCloak.
 
 ### Makefile mode
 
@@ -24,6 +24,10 @@ Makefile used in this guide (update the `VALUES_FILE` or `REALM_FILE` values):
 # Create a local k3d cluster
 k3d_create:
 	k3d cluster create vkpr-local -p "8080:80@loadbalancer" -p "8443:443@loadbalancer" --k3s-server-arg "--no-deploy=traefik"
+
+# Create a local k3d cluster
+k3d_delete:
+	k3d cluster delete vkpr-local
 
 # Installation and setup VKPR
 install_vkpr:
@@ -83,7 +87,7 @@ k3d cluster create vkpr-local \
   --k3s-server-arg "--no-deploy=traefik"
 ```
 
-The above command creates a k3d cluster without Traefik as a load balancer because we will use VKPR's NGINX.
+K3d by default installs traefik as a load balancer, above command creates a k3d cluster without Traefik because we will use VKPR's NGINX Ingress Controller.
 
 Then install and configure VKPR running (update the `VALUES_FILE` or `REALM_FILE` values):
 
@@ -99,10 +103,10 @@ To access Grafana and KeyCloak it is necessary to add some custom domains to `/e
 
 ```shell
 # Get external ip from nginx
-kubectl get services
+kubectl get service vkpr-ingress-nginx-controller
 
 # Edit hosts file
-sudo sh -c echo "<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http.default.svc" >> /etc/hosts
+sudo sh -c "echo '<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http.default.svc' >> /etc/hosts"
 ```
 
 Finally the guide go to the [next section](#access-grafana-and-keycloak) to see the credentials of Grafana and KeyCloak.
@@ -123,4 +127,16 @@ To access the KeyCloak administration console, use:
 url: http://vkpr-keycloak-http.default.svc
 username: admin
 password: vkpr1234
+```
+
+## Destroy cluster
+
+After finishing the guide, destroy cluster k3d running:
+
+```shell
+# Makefile mode
+make k3d_delete
+
+# Manual mode
+k3d cluster delete vkpr-local
 ```
