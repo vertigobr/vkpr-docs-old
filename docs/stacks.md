@@ -66,7 +66,8 @@ By default the **Loki** is enabled in *VKPR* installation. An example of configu
 ```yaml
 loki-stack:
   enabled: true
-  serviceScheme: https
+  grafana:
+    enabled: false
 ```
 
 To see more configurations, access the [documentation](https://github.com/grafana/loki/tree/master/production/helm).
@@ -79,7 +80,7 @@ To see more configurations, access the [documentation](https://github.com/grafan
 
 #### Implementation
 
-By default the **Prometheus Operator** is enabled in *VKPR* installation. An example of configuration:
+By default the **Prometheus Operator** is disabled in *VKPR* installation. An example of configuration:
 
 ```yaml
 kube-prometheus-stack:
@@ -186,20 +187,33 @@ vault:
 
 To see more configurations, access the [documentation](https://github.com/hashicorp/vault-helm).
 
-### Keycloak
+### KeyCloak
 
-[Keycloak](https://github.com/keycloak/keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
+[KeyCloak](https://github.com/keycloak/keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
 
 #### Implementation
 
-By default the **Keycloak** is disabled in *VKPR* installation. An example of configuration:
+By default the **KeyCloak** is disabled in *VKPR* installation. An example of configuration:
 
 ```yaml
 keycloak:
   enabled: true
-  keycloak:
-    username: keycloak
-    password: admin123
+  rbac:
+    create: true
+  postgresql:
+    enabled: false
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    rules:
+      - host: keycloak.<DOMAIN>
+        paths: ["/"]
+  extraEnv: |
+    - name: KEYCLOAK_USER
+      value: admin
+    - name: KEYCLOAK_PASSWORD
+      value: vkpr1234
 ```
 
 To view more configuration, access the [documentation](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#configuration).

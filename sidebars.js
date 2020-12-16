@@ -3,21 +3,14 @@ module.exports = {
     {
       type: 'category',
       label: 'VKPR',
-      items: ["introduction", "stacks", "roadmap", "faq"],
+      items: ['introduction', 'stacks', 'roadmap', 'faq'],
     },
     {
       type: 'category',
       label: 'Getting Started',
       collapsed: false,
       items: [
-        "quickstart",
-        "velero-setup",
-        {
-          "Amazon EKS": ["eks/installation", "eks/velero-setup"]
-        },
-        {
-          "Digital Ocean": ["digital-ocean/installation"]
-        }
+        'quickstart',
       ],
     },
     {
@@ -26,7 +19,20 @@ module.exports = {
       items: [
         {
           Local: ['guides/local/grafana-with-keycloak']
-        }
+        },
+        {
+          'Amazon EKS': ['guides/eks/installation', 'guides/eks/velero-setup']
+        },
+        {
+          'Digital Ocean': ['guides/digital-ocean/installation']
+        },
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Advanced Guides',
+      items: [
+        'advanced_guides/velero-setup',
       ],
     },
   ],

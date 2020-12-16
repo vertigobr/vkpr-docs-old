@@ -50,7 +50,7 @@ The **Security Stack** is dedicated to security tools, like identity and secret 
 
 - [Cert Manager](/docs/stacks#cert-manager) is a Kubernetes addon to automate the management and issuance of TLS certificates from various issuing sources.
 - [Vault](/docs/stacks#vault) secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing. 
-- [Keycloak](/docs/stacks#keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
+- [KeyCloak](/docs/stacks#keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
 
 ### Backup stack
 
@@ -68,7 +68,7 @@ The **Backup Stack** is dedicated to backup and restore tools in order to migrat
 | [Prometheus Stack](/docs/stacks#prometheus-stack)                 |  `10.3.1`  |
 | [Jaeger](/docs/stacks#jaeger)                                     |  `0.39.0`  |
 | [Cert Manager](/docs/stacks#cert-manager)                         |  `1.0.3`   |
-| [Keycloak](/docs/stacks#keycloak)                                 |  `9.5.0`   |
+| [KeyCloak](/docs/stacks#keycloak)                                 |  `9.5.0`   |
 | [Vault](/docs/stacks#vault)                                       |  `0.8.0`   |
 | [Velero](/docs/stacks#velero)                                     |  `2.13.3`  |
 

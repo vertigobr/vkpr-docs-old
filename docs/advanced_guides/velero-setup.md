@@ -4,6 +4,10 @@ title: Prerequisites to Velero Installation
 sidebar_label: Velero Setup
 ---
 
+:::caution
+This section is a work in progress.
+:::
+
 ## AWS
 
 Before proceding to the installation, check the [Prerequisites](https://velero.io/docs/v1.2.0/basic-install/) to get Velero on your EKS cluster. After that you will have what is needed to put into the values-aws.yaml
