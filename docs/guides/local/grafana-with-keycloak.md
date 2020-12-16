@@ -5,12 +5,12 @@ title: Grafana with KeyCloak
 
 This guide shows the Grafana with KeyCloak in local k3d environment and some tools are prerequisites for run:
 
-- [Helm](https://helm.sh/docs/intro/install/#helm)
-- [k3d](https://k3d.io/)
+- [k3d](https://k3d.io/) >= 3.3.0
+- [Helm](https://helm.sh/docs/intro/install/#helm) >= 3.0.0
 
 ## Installation and setup VKPR
 
-The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create two configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-keycloak-grafana.yaml) for VKPR and [json file](https://github.com/vertigobr/vkpr/blob/master/examples/keycloak/realm.json) to KeyCloak:
+The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create two configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-keycloak-grafana.yaml) for VKPR and [realm file](https://github.com/vertigobr/vkpr/blob/master/examples/keycloak/realm.json) to KeyCloak.
 
 ### Makefile mode
 
@@ -25,11 +25,20 @@ Makefile used in this guide (update the `VALUES_FILE` or `REALM_FILE` values):
 k3d_create:
 	k3d cluster create vkpr-local -p "8080:80@loadbalancer" -p "8443:443@loadbalancer" --k3s-server-arg "--no-deploy=traefik"
 
+# Create a local k3d cluster
+k3d_delete:
+	k3d cluster delete vkpr-local
+
+# Setup VKPR repository in Helm
+setup_vkpr:
+	helm repo add vertigo https://charts.vertigo.com.br
+	helm repo update
+
 # Installation and setup VKPR
 install_vkpr:
 	@echo "KUBECONFIG=$(KUBECONFIG)"
 	kubectl create secret generic vkpr-realm-secret --from-file=<REALM_FILE>
-	helm upgrade -i vkpr -f <VALUES_FILE> vertigo/vkpr
+	helm upgrade -i -f <VALUES_FILE> vkpr vertigo/vkpr
 
 # Add hosts
 add_hosts:
@@ -58,6 +67,12 @@ Before installing VKPR need to create a local cluster with k3d, run:
 make k3d_create
 ```
 
+To configure VKPR in Helm, run:
+
+```shell
+make setup_vkpr
+```
+
 To install VKPR, run:
 
 ```shell
@@ -83,7 +98,17 @@ k3d cluster create vkpr-local \
   --k3s-server-arg "--no-deploy=traefik"
 ```
 
-The above command creates a k3d cluster without Traefik as a load balancer because we will use VKPR's NGINX.
+K3d by default installs Traefik as a load balancer, above command creates a k3d cluster without Traefik because we will use VKPR's NGINX Ingress Controller.
+
+Before installation Helm needs to know the VKPR repository, run:
+
+```shell
+# Add repo chart
+helm repo add vertigo https://charts.vertigo.com.br
+
+# Update repo
+helm repo update
+```
 
 Then install and configure VKPR running (update the `VALUES_FILE` or `REALM_FILE` values):
 
@@ -92,17 +117,17 @@ Then install and configure VKPR running (update the `VALUES_FILE` or `REALM_FILE
 kubectl create secret generic vkpr-realm-secret --from-file=<REALM_FILE>
 
 # Install VKPR
-helm upgrade -i vkpr -f <VALUES_FILE> vertigo/vkpr
+helm upgrade -i -f <VALUES_FILE> vkpr vertigo/vkpr
 ```
 
 To access Grafana and KeyCloak it is necessary to add some custom domains to `/etc/hosts`. First get the external ip of nginx and then edit the hosts file (update `LOAD_BALANCER_IP` value), run:
 
 ```shell
 # Get external ip from nginx
-kubectl get services
+kubectl get service vkpr-ingress-nginx-controller
 
 # Edit hosts file
-sudo sh -c echo "<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http.default.svc" >> /etc/hosts
+sudo sh -c "echo '<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http.default.svc' >> /etc/hosts"
 ```
 
 Finally the guide go to the [next section](#access-grafana-and-keycloak) to see the credentials of Grafana and KeyCloak.
@@ -123,4 +148,16 @@ To access the KeyCloak administration console, use:
 url: http://vkpr-keycloak-http.default.svc
 username: admin
 password: vkpr1234
+```
+
+## Destroy cluster
+
+After finishing the guide, destroy cluster k3d running:
+
+```shell
+# Makefile mode
+make k3d_delete
+
+# Manual mode
+k3d cluster delete vkpr-local
 ```

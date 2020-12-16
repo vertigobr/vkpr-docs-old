@@ -4,6 +4,10 @@ title: VKPR installation on Amazon EKS
 sidebar_label: Installation
 ---
 
+:::caution
+This section is a work in progress.
+:::
+
 This document walks you through a VKPR installation on [Amazon EKS](https://aws.amazon.com/eks/). The following links guide you to the installation on others clouds: [Digital Ocean](/docs/digital-ocean/installation), GKE.
 
 ## Installation and setup VKPR

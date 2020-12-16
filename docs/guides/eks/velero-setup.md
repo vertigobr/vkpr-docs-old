@@ -1,8 +1,12 @@
 ---
 id: velero-setup
-title: Prerequisites to Velero Installation on Amazon EKS
-sidebar_label: Velero Setup
+title: Prerequisites to Velero installation on Amazon EKS
+sidebar_label: Velero setup
 ---
+
+:::caution
+This section is a work in progress.
+:::
 
 In order to get Velero working on [Amazon EKS](https://aws.amazon.com/eks/) we need to configure credentials and the Object Storage.
 

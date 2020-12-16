@@ -41,18 +41,16 @@ The **Logging Stack** is dedicated to distributed logs management tools.
 
 The **Monitoring Stack** is dedicated to observation and metrics management tools either for your services, applications or the Kubernetes Cluster.
 
-- [Prometheus Operator](/docs/stacks#prometheus-operator) provides Kubernetes native deployment and management of Prometheus and related monitoring components. Prometheus Operator contains the following modules:
-  - [Grafana](https://grafana.com/oss/grafana/) allows you to query, visualize and alert on metrics and logs no matter where they are stored.
-  - [Prometheus](https://grafana.com/oss/prometheus/) monitoring system includes a rich, multidimensional data model, a concise and powerful query language called PromQL, an efficient embedded timeseries database, and over 150 integrations with third-party systems.
-  - [Alertmanager](https://prometheus.io/docs/alerting/latest/alertmanager/) handles alerts sent by client applications such as the Prometheus server.
+- [Prometheus Stack](/docs/stacks#prometheus-operator) provides Kubernetes native deployment and management of Prometheus and related monitoring components.
+- [Jaeger](/docs/stacks#jaeger) is a distributed tracing system released as open source. It is used for monitoring and troubleshooting microservices-based distributed systems.
 
 ### Security stack
 
 The **Security Stack** is dedicated to security tools, like identity and secret management, to your services.
 
-- [cert-manager](/docs/stacks#cert-manager) is a Kubernetes addon to automate the management and issuance of TLS certificates from various issuing sources.
+- [Cert Manager](/docs/stacks#cert-manager) is a Kubernetes addon to automate the management and issuance of TLS certificates from various issuing sources.
 - [Vault](/docs/stacks#vault) secures, stores, and tightly controls access to tokens, passwords, certificates, API keys, and other secrets in modern computing. 
-- [Keycloak](/docs/stacks#keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
+- [KeyCloak](/docs/stacks#keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
 
 ### Backup stack
 
@@ -62,21 +60,22 @@ The **Backup Stack** is dedicated to backup and restore tools in order to migrat
 
 ## Charts version
 
-|                              Charts                               | VKPR 0.7.0 |
+|                              Charts                               | VKPR 0.8.2 |
 |-------------------------------------------------------------------|------------|
-| [cert-manager](/docs/stacks#cert-manager)                         |  `0.16.0`  |
-| [ExternalDNS](/docs/stacks#externaldns)                           |  `3.2.2`   |
-| [Loki](/docs/stacks#loki)                                         |  `0.37.0`  |
-| [Keycloak](/docs/stacks#keycloak)                                 |  `8.2.2`   |
-| [NGINX Ingress Controller](/docs/stacks#nginx-ingress-controller) |  `1.34.3`  |
-| [Prometheus Operator](/docs/stacks#prometheus-operator)           |  `8.12.3`  |
-| [Vault](/docs/stacks#vault)                                       |  `0.5.0`   |
-| [Velero](/docs/stacks#velero)                                     |  `2.7.4`   |
+| [ExternalDNS](/docs/stacks#externaldns)                           |  `3.4.9`   |
+| [NGINX Ingress Controller](/docs/stacks#nginx-ingress-controller) |  `3.7.1`   |
+| [Loki](/docs/stacks#loki)                                         |  `2.0.0`   |
+| [Prometheus Stack](/docs/stacks#prometheus-stack)                 |  `10.3.1`  |
+| [Jaeger](/docs/stacks#jaeger)                                     |  `0.39.0`  |
+| [Cert Manager](/docs/stacks#cert-manager)                         |  `1.0.3`   |
+| [KeyCloak](/docs/stacks#keycloak)                                 |  `9.5.0`   |
+| [Vault](/docs/stacks#vault)                                       |  `0.8.0`   |
+| [Velero](/docs/stacks#velero)                                     |  `2.13.3`  |
 
 ## Requisites
 
 - Kubernetes >= 1.15
-- Helm >= 3
+- Helm >= 3.0.0
 
 ## Contributing
 
