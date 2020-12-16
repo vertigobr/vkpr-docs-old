@@ -3,7 +3,12 @@ module.exports = {
     {
       type: 'category',
       label: 'VKPR',
-      items: ['introduction', 'stacks', 'roadmap', 'faq'],
+      items: [
+        'introduction',
+        'stacks',
+        'roadmap',
+        'faq'
+      ],
     },
     {
       type: 'category',
@@ -18,13 +23,21 @@ module.exports = {
       label: 'Guides',
       items: [
         {
-          Local: ['guides/local/grafana-with-keycloak']
+          Local: [
+            'guides/local/basic-installation',
+            'guides/local/grafana-with-keycloak',
+          ]
         },
         {
-          'Amazon EKS': ['guides/eks/installation', 'guides/eks/velero-setup']
+          'Amazon EKS': [
+            'guides/eks/installation',
+            'guides/eks/velero-setup',
+          ]
         },
         {
-          'Digital Ocean': ['guides/digital-ocean/installation']
+          'Digital Ocean': [
+            'guides/digital-ocean/installation'
+          ]
         },
       ],
     },

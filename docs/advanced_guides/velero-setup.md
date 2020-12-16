@@ -1,7 +1,7 @@
 ---
 id: velero-setup
-title: Prerequisites to Velero Installation
-sidebar_label: Velero Setup
+title: Prerequisites to Velero installation
+sidebar_label: Velero setup
 ---
 
 :::caution
