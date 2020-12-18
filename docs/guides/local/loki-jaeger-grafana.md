@@ -1,6 +1,6 @@
 ---
 id: loki-jaeger-grafana
-title: Loki, Jaeger and Grafana
+title: Observability with Loki, Jaeger and Grafana
 ---
 
 This guide shows the integration and use of Open Tracing between Loki, Jaeger and Grafana in local k3d environment and some tools are prerequisites for run:
