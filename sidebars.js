@@ -26,6 +26,7 @@ module.exports = {
           Local: [
             'guides/local/basic-installation',
             'guides/local/grafana-with-keycloak',
+            'guides/local/loki-grafana',
             'guides/local/loki-jaeger-grafana',
           ]
         },
