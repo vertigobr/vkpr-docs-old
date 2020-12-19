@@ -3,7 +3,7 @@ id: grafana-with-keycloak
 title: Authentication with Grafana with KeyCloak
 ---
 
-This guide shows the Grafana with KeyCloak in local k3d environment and some tools are prerequisites for run:
+This guide shows the Grafana with KeyCloak authentication in local k3d environment and some tools are prerequisites for run:
 
 - [k3d](https://k3d.io/) >= 3.3.0
 - [Helm](https://helm.sh/docs/intro/install/#helm) >= 3.0.0
