@@ -1,6 +1,6 @@
 ---
 id: grafana-with-keycloak
-title: Authentication with Grafana with KeyCloak
+title: Grafana authentication with KeyCloak
 ---
 
 This guide shows the Grafana with KeyCloak authentication in local k3d environment and some tools are prerequisites for run:

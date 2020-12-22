@@ -28,6 +28,7 @@ module.exports = {
             'guides/local/loki-grafana',
             'guides/local/loki-jaeger-grafana',
             'guides/local/grafana-with-keycloak',
+            'guides/local/vault-with-keycloak',
           ]
         },
         {
