@@ -48,6 +48,7 @@ module.exports = {
       type: 'category',
       label: 'Advanced Guides',
       items: [
+        'advanced_guides/developer',
         'advanced_guides/velero-setup',
       ],
     },
