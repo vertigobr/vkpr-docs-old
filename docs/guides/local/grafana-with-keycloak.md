@@ -132,7 +132,7 @@ sudo sh -c "echo '<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http
 
 Finally the guide go to the [next section](#access-grafana-and-keycloak) to see the credentials of Grafana and KeyCloak.
 
-## Access Grafana and KeyCloak 
+## Access Grafana and KeyCloak
 
 To access the Grafana with KeyCloak authentication use the following credentials:
 

@@ -25,6 +25,7 @@ module.exports = {
         {
           Local: [
             'guides/local/basic-installation',
+            'guides/local/certs-dns',
             'guides/local/loki-grafana',
             'guides/local/loki-jaeger-grafana',
             'guides/local/grafana-with-keycloak',
