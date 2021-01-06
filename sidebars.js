@@ -25,7 +25,11 @@ module.exports = {
         {
           Local: [
             'guides/local/basic-installation',
+            'guides/local/certs-dns',
+            'guides/local/loki-grafana',
+            'guides/local/loki-jaeger-grafana',
             'guides/local/grafana-with-keycloak',
+            'guides/local/vault-with-keycloak',
           ]
         },
         {
@@ -45,6 +49,7 @@ module.exports = {
       type: 'category',
       label: 'Advanced Guides',
       items: [
+        'advanced_guides/developer',
         'advanced_guides/velero-setup',
       ],
     },

@@ -1,16 +1,16 @@
 ---
-id: grafana-with-keycloak
-title: Grafana authentication with KeyCloak
+id: loki-jaeger-grafana
+title: Observability with Loki, Jaeger and Grafana
 ---
 
-This guide shows the Grafana with KeyCloak authentication in local k3d environment and some tools are prerequisites for run:
+This guide shows the integration and use of Open Tracing between Loki, Jaeger and Grafana in local k3d environment and some tools are prerequisites for run:
 
 - [k3d](https://k3d.io/) >= 3.3.0
 - [Helm](https://helm.sh/docs/intro/install/#helm) >= 3.0.0
 
 ## Installation and setup VKPR
 
-The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create two configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-keycloak-grafana.yaml) for VKPR and [realm file](https://github.com/vertigobr/vkpr/blob/master/examples/keycloak/realm.json) to KeyCloak.
+The installation and configuration in this guide can be done in two ways, via [makefile](#makefile-mode) or [manual](#manual-mode). You will need to create one configuration files in this guide the [values file](https://github.com/vertigobr/vkpr/blob/master/examples/local/values-local-loki-grafana-jaeger.yaml) for VKPR.
 
 ### Makefile mode
 
@@ -18,7 +18,7 @@ The installation and configuration in this guide can be done in two ways, via [m
 In this way the installation of the makefile is required.
 :::
 
-Makefile used in this guide (update the `VALUES_FILE` or `REALM_FILE` values):
+Makefile used in this guide (update the `VALUES_FILE` values):
 
 ```makefile title="makefile"
 # Create a local k3d cluster
@@ -37,7 +37,6 @@ setup_vkpr:
 # Installation and setup VKPR
 install_vkpr:
 	@echo "KUBECONFIG=$(KUBECONFIG)"
-	kubectl create secret generic vkpr-realm-secret --from-file=<REALM_FILE>
 	helm upgrade -i -f <VALUES_FILE> vkpr vertigo/vkpr
 
 # Add hosts
@@ -52,10 +51,10 @@ add_hosts:
 		else \
 			echo "LoadBalancer external IP: $${LB_IP}"; \
 			echo "Hacking into /etc/hosts, gonna need sudo, please."; \
-			if grep -q "vkpr-keycloak-http" /etc/hosts; then \
-				sudo sed "s/.*vkpr-keycloak-http.*/$${LB_IP} vkpr-grafana.default.svc vkpr-jaeger.default.svc vkpr-vault.default.svc vkpr-keycloak-http.default.svc/g" -i /etc/hosts; \
+			if grep -q "whoami" /etc/hosts; then \
+				sudo sed "s/.*whoami.*/$${LB_IP} vkpr-grafana.default.svc vkpr-jaeger.default.svc whoami.localdomain/g" -i /etc/hosts; \
 			else \
-				sudo sh -c "echo '$${LB_IP} vkpr-grafana.default.svc vkpr-jaeger.default.svc vkpr-vault.default.svc vkpr-keycloak-http.default.svc' >> /etc/hosts"; \
+				sudo sh -c "echo '$${LB_IP} vkpr-grafana.default.svc vkpr-jaeger.default.svc whoami.localdomain' >> /etc/hosts"; \
 			fi; \
 		fi; \
 	done
@@ -79,13 +78,13 @@ To install VKPR, run:
 make install_vkpr
 ```
 
-To access Grafana and KeyCloak it is necessary to add some custom domains to `/etc/hosts`, execute:
+To access Grafana and Jaeger it is necessary to add some custom domains to `/etc/hosts`, execute:
 
 ```shell
 make add_hosts
 ```
 
-Finally the guide go to the [next section](#access-grafana-and-keycloak) to see the credentials of Grafana and KeyCloak.
+Finally the guide go to the [next section](#access-grafana-and-jaeger) to see the credentials of Grafana and Jaeger.
 
 ### Manual mode
 
@@ -110,44 +109,40 @@ helm repo add vertigo https://charts.vertigo.com.br
 helm repo update
 ```
 
-Then install and configure VKPR running (update the `VALUES_FILE` or `REALM_FILE` values):
+Then install and configure VKPR running (update the `VALUES_FILE` values):
 
 ```shell
-# Create secret
-kubectl create secret generic vkpr-realm-secret --from-file=<REALM_FILE>
-
-# Install VKPR
 helm upgrade -i -f <VALUES_FILE> vkpr vertigo/vkpr
 ```
 
-To access Grafana and KeyCloak it is necessary to add some custom domains to `/etc/hosts`. First get the external ip of nginx and then edit the hosts file (update `LOAD_BALANCER_IP` value), run:
+To access Grafana and Jaeger it is necessary to add some custom domains to `/etc/hosts`. First get the external ip of nginx and then edit the hosts file (update `LOAD_BALANCER_IP` value), run:
 
 ```shell
 # Get external ip from nginx
 kubectl get service vkpr-ingress-nginx-controller
 
 # Edit hosts file
-sudo sh -c "echo '<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-keycloak-http.default.svc' >> /etc/hosts"
+sudo sh -c "echo '<LOAD_BALANCER_IP> vkpr-grafana.default.svc vkpr-jaeger.default.svc whoami.localdomain' >> /etc/hosts"
 ```
 
-Finally the guide go to the [next section](#access-grafana-and-keycloak) to see the credentials of Grafana and KeyCloak.
+Finally the guide go to the [next section](#access-grafana-and-jaeger) to see the credentials of Grafana and Jaeger.
 
-## Access Grafana and KeyCloak
+## Access Grafana and Jaeger
 
-To access the Grafana with KeyCloak authentication use the following credentials:
+To access the Grafana use the following credentials:
 
 ```yaml
 url: http://vkpr-grafana.default.svc
-username: user
-password: password
+username: admin
+password: prom-operator
 ```
 
-To access the KeyCloak administration console, use:
+To view the collection of Loki logs in Grafana navigate through the left sidebar until you explore. In this section of Grafana choose the label of the application you want to view the log and then click on Run Query.
+
+To access the Jaeger, use:
 
 ```yaml
-url: http://vkpr-keycloak-http.default.svc
-username: admin
-password: vkpr1234
+url: http://vkpr-jaeger.default.svc
 ```
 
 ## Destroy cluster
