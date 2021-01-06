@@ -8,7 +8,7 @@ sidebar_label: Installation
 This section is a work in progress.
 :::
 
-This document walks you through a VKPR installation on [Digital Ocean Cluster](https://www.digitalocean.com/products/kubernetes/). The following links guide you to the installation on others clouds: [Amazon EKS](/docs/eks/installation), GKE.
+This document walks you through a VKPR installation on [Digital Ocean Cluster](https://www.digitalocean.com/products/kubernetes/). The following links guide you to the installation on others clouds: [Amazon EKS](/docs/guides/eks/installation), GKE.
 
 ## Installation and setup VKPR
 

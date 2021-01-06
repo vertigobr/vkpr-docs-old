@@ -3,7 +3,7 @@ id: quickstart
 title: Quickstart
 ---
 
-This document walks you through a default VKPR installation. The following links guide you to the installation on specific clouds: [EKS](/docs/eks/installation), Digital Ocean, GKE.
+This document walks you through a default VKPR installation. The following links guide you to the installation on specific clouds: [EKS](/docs/guides/eks/installation), Digital Ocean, GKE.
 
 ## Installation and setup VKPR
 
