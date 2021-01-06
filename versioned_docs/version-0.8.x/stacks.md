@@ -66,49 +66,85 @@ By default the **Loki** is enabled in *VKPR* installation. An example of configu
 ```yaml
 loki-stack:
   enabled: true
-  serviceScheme: https
+  grafana:
+    enabled: false
 ```
 
 To see more configurations, access the [documentation](https://github.com/grafana/loki/tree/master/production/helm).
 
 ## Monitoring stack
 
-### Prometheus Operator
+### Prometheus Stack
 
-[Prometheus Operator](https://github.com/coreos/prometheus-operator) provides Kubernetes native deployment and management of [Prometheus](https://prometheus.io/) and related monitoring components. The purpose of this project is to simplify and automate the configuration of a Prometheus based monitoring stack for Kubernetes clusters.
-
-Prometheus Operator contains the following modules:
-
-- **[Grafana](https://github.com/grafana/grafana)** allows you to query, visualize, alert on and understand your metrics no matter where they are stored.
-
-- **[Prometheus](https://prometheus.io/)** scrapes metrics from instrumented jobs, either directly or via an intermediary push gateway for short-lived jobs. It stores all scraped samples locally and runs rules over this data to either aggregate and record new time series from existing data or generate alerts.
-
-- **[Alertmanager](https://github.com/prometheus/alertmanager)** handles alerts sent by client applications such as the Prometheus server. It takes care of deduplicating, grouping, and routing them to the correct receiver integrations such as email, PagerDuty, or OpsGenie. It also takes care of silencing and inhibition of alerts.
+[Prometheus Stack](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack) a collection of Kubernetes manifests, [Grafana](https://github.com/grafana/grafana) dashboards, and [Prometheus](https://prometheus.io/) rules combined with documentation and scripts to provide easy to operate end-to-end Kubernetes cluster monitoring with Prometheus using the Prometheus Operator.
 
 #### Implementation
 
-By default the **Prometheus Operator** is enabled in *VKPR* installation. An example of configuration:
+By default the **Prometheus Operator** is disabled in *VKPR* installation. An example of configuration:
 
 ```yaml
-prometheus-operator:
+kube-prometheus-stack:
   enabled: true
   prometheusOperator:
+    enabled: true
     createCustomResource: false
+    cleanupCustomResource: false
+  prometheus:
+    enabled: true
+  alertmanager:
+    enabled: false
   grafana:
-    adminPassword: "password"
+    enabled: true
+    sidecar:
+      datasources:
+        enabled: true
+    persistence:
+      enabled: false
     ingress:
       enabled: true
-      annotations:
-        kubernetes.io/ingress.class: nginx
-        kubernetes.io/tls-acme: "true"
-      hosts: ["grafana.whoami.com"]
+      hosts:
+      - grafana.<DOMAIN>
 ```
 
-To see more configurations, access the [documentation](https://github.com/helm/charts/tree/master/stable/prometheus-operator#general).
+To see more configurations, access the [documentation](https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack).
+
+### Jaeger
+
+[Jaeger](https://github.com/jaegertracing/jaeger) is a distributed tracing system released as open source. It is used for monitoring and troubleshooting microservices-based distributed systems.
+
+#### Implementation
+
+By default the **Jaeger** is disabled in *VKPR* installation. An example of configuration:
+
+```yaml
+jaeger:
+  enabled: true
+  cassandra:
+    config:
+      max_heap_size: 1024M
+      heap_new_size: 256M
+      cluster_size: 1
+    persistence:
+      enabled: true
+    resources:
+      requests:
+        memory: 2048Mi
+        cpu: 0.4
+      limits:
+        memory: 2048Mi
+        cpu: 1.0
+  query:
+    ingress:
+      enabled: true
+      hosts:
+      - jaeger.<DOMAIN>
+```
+
+To see more configurations, access the [documentation](https://github.com/jaegertracing/helm-charts/tree/master/charts/jaeger).
 
 ## Security stack
 
-### cert-manager
+### Cert Manager
 
 [cert-manager](https://github.com/jetstack/cert-manager) is a Kubernetes addon to automate the management and issuance of TLS certificates from various issuing sources.
 
@@ -151,20 +187,33 @@ vault:
 
 To see more configurations, access the [documentation](https://github.com/hashicorp/vault-helm).
 
-### Keycloak
+### KeyCloak
 
-[Keycloak](https://github.com/keycloak/keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
+[KeyCloak](https://github.com/keycloak/keycloak) is an Open Source Identity and Access Management solution for modern Applications and Services.
 
 #### Implementation
 
-By default the **Keycloak** is disabled in *VKPR* installation. An example of configuration:
+By default the **KeyCloak** is disabled in *VKPR* installation. An example of configuration:
 
 ```yaml
 keycloak:
   enabled: true
-  keycloak:
-    username: keycloak
-    password: admin123
+  rbac:
+    create: true
+  postgresql:
+    enabled: false
+  ingress:
+    enabled: true
+    annotations:
+      kubernetes.io/ingress.class: nginx
+    rules:
+      - host: keycloak.<DOMAIN>
+        paths: ["/"]
+  extraEnv: |
+    - name: KEYCLOAK_USER
+      value: admin
+    - name: KEYCLOAK_PASSWORD
+      value: vkpr1234
 ```
 
 To view more configuration, access the [documentation](https://github.com/codecentric/helm-charts/tree/master/charts/keycloak#configuration).

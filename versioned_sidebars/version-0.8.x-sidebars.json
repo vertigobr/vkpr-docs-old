@@ -1,0 +1,117 @@
+{
+  "version-0.8.x/docs": [
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "VKPR",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.8.x/introduction"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.x/stacks"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.x/roadmap"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.x/faq"
+        }
+      ]
+    },
+    {
+      "collapsed": false,
+      "type": "category",
+      "label": "Getting Started",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.8.x/quickstart"
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Guides",
+      "items": [
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Local",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/basic-installation"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/certs-dns"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/loki-grafana"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/loki-jaeger-grafana"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/grafana-with-keycloak"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/local/vault-with-keycloak"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Amazon EKS",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/eks/installation"
+            },
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/eks/velero-setup"
+            }
+          ]
+        },
+        {
+          "collapsed": true,
+          "type": "category",
+          "label": "Digital Ocean",
+          "items": [
+            {
+              "type": "doc",
+              "id": "version-0.8.x/guides/digital-ocean/installation"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "collapsed": true,
+      "type": "category",
+      "label": "Advanced Guides",
+      "items": [
+        {
+          "type": "doc",
+          "id": "version-0.8.x/advanced_guides/developer"
+        },
+        {
+          "type": "doc",
+          "id": "version-0.8.x/advanced_guides/velero-setup"
+        }
+      ]
+    }
+  ]
+}
